@@ -2,7 +2,7 @@
 from app import app
 from models import db, Convention, ConventionArea, Attendee
 
-class clear_data():
+def clear_data():
     Convention.query.delete()
     ConventionArea.query.delete()
     Attendee.query.delete()
@@ -40,7 +40,7 @@ def seed():
     add_attendees()
 
     print("seeding convetions...")
-    add_conventions()
+    add_convention()
 
 if __name__ == '__main__':
     with app.app_context():
