@@ -31,7 +31,25 @@ class ConventionAreas(Resource):
         except ValueError:
             return make_response({'errors': ['validataion errors']}, 400)
 
+class Conventions(Resource):
+    def get(self):
+        conventions = Convention.query.all()
+        return [convention.to_dict(only=('id, convention_name', 'days', 'convention_area_id', 'attendee_id')) for convention in conventions]
 
+    def post(self):
+        data = request.get_json()
+        try:
+            new_convention = Convention(
+                convention_name=data['convention_name'],
+                days=data['days'],
+                convention_area_id=data['convention_area_id'],
+                attendee_id=data['attendee_id']
+            )
+            db.session.add(new_convention)
+            db.session.commit()
+            return make_response(new_convention.to_dict(), 201)
+        except ValueError:
+            return make_response({'errors': ['validation errors']}, 400)
 
 
 if __name__ == '__main__':
