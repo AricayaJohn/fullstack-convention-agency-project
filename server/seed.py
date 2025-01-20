@@ -26,12 +26,22 @@ def add_convention():
     convention1 = Convention(convention_name='Tech conference 2025', days=3, convention_area_id=2, attendee_id=1)
     convention2  = Convention(convention_name='Food Convention Festival', days=5, convention_area_id=1, attendee_id=2)
 
-    db.session.add_all([convention1,convention2])
+    db.session.add_all([convention1, convention2])
     db.session.commit()
 
+def seed():
+    print("clearing data...")
+    clear_data()
+
+    print("seeding convention areas...")
+    add_convention_areas()
+
+    print("seeding attendees...")
+    add_attendees()
+
+    print("seeding convetions...")
+    add_conventions()
 
 if __name__ == '__main__':
-    fake = Faker()
     with app.app_context():
-        print("Starting seed...")
-        # Seed code goes here!
+        seed()
