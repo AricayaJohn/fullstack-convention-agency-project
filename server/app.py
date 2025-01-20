@@ -119,6 +119,11 @@ class AttendeeByID(Resource):
             return '', 204
         return {'error': 'attendee not found'}, 404
 
+api.add_resource(ConventionAreas, '/convention_areas')
+api.add_resource(Conventions, '/conventions')
+api.add_resource(Attendees, '/attendees')
+api.add_resource(ConventionById, '/conventions/<int:id>')
+api.add_resource(AttendeesById, '/attendees/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
