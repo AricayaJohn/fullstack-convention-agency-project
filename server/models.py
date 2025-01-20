@@ -32,7 +32,7 @@ class Attendee(db.Model, SerializerMixin):
 
     @validates('profession')
     def validate_profession(self, key, profession):
-        if not prodession:
+        if not profession:
             raise ValueError('Profession cannot be empty')
         return profession
 
