@@ -51,6 +51,50 @@ class Conventions(Resource):
         except ValueError:
             return make_response({'errors': ['validation errors']}, 400)
 
+class Attendees(Resource):
+    def get(self):
+        attendees = Attendee.query.all()
+        return [attendee.to_dict(only=('id', 'name', 'profession')) for attendee in attendees ]
+
+    def post(self):
+        data = request.get_json()
+        try:
+            new_attendee = Attendee(
+                name=data['name'],
+                profession=data['profession']
+            )
+            db.session.add(new_attendee)
+            db.session.commit()
+            return make_response(new_attendee.to_dict(), 201)
+        except ValueError:
+            return make_response({'errors': ['validation errors']}, 400)
+
+class ConventionById(Resource):
+    def get(self,id):
+        convention = db.session.get(Convention, id)
+        if convention:
+            return convention.to_dict(), 200
+        return {'error': 'Convention not found'}, 404
+
+    def patch(self, id):
+        convention = db.session.get(Convention, id)
+        if convention:
+            data = request.get_json()
+            for key, value in data.items():
+                setattr(convention, key, value)
+            db.session.commit()
+            return make_response(convention.to_dict(), 202)
+        return make_response({'error': 'Convention not found'}, 404)
+
+    def delete(self, id):
+        convention = db.session.get(Convention, id)
+        if convention:
+            db.session.delete(convention)
+            db.session.commit()
+            return '', 204
+        return {'error': 'Convention not found'}, 404
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
