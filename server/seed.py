@@ -23,10 +23,11 @@ def add_attendees():
     db.session.commit()
 
 def add_convention():
-    convention1 = Convention(convention_name='Tech conference 2025', days=3, convention_area_id=2, attendee_id=1)
-    convention2  = Convention(convention_name='Food Convention Festival', days=5, convention_area_id=1, attendee_id=2)
+    convention1 = Convention(convention_name='Tech conference 2025', days=3, convention_area_id = 2, attendee_id = 1)
+    convention2 = Convention(convention_name='Food Convention Festival', days=5, convention_area_id = 1, attendee_id = 2)
+    convention3 = Convention(convention_name='Movie Award Convention', days=1, convention_area_id = 1, attendee_id = 2)
 
-    db.session.add_all([convention1, convention2])
+    db.session.add_all([convention1, convention2, convention3])
     db.session.commit()
 
 def seed():
@@ -39,7 +40,7 @@ def seed():
     print("seeding attendees...")
     add_attendees()
 
-    print("seeding convetions...")
+    print("seeding conventions...")
     add_convention()
 
 if __name__ == '__main__':

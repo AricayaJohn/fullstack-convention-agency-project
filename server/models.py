@@ -43,17 +43,17 @@ class Convention(db.Model, SerializerMixin):
     convention_name = db.Column(db.String, nullable=False)
     days = db.Column(db.Integer, nullable=False)
 
-    convention_area_id = db.Column(db.Integer, db.ForeignKey('convention_areas.id'), nullable=False)
-    attendee_id = db.Column(db.Integer, db.ForeignKey('attendees.id'), nullable=False)
+    convention_area_id = db.Column(db.Integer, db.ForeignKey('convention_areas.id'))
+    attendee_id = db.Column(db.Integer, db.ForeignKey('attendees.id'))
 
     serialize_rules = ('-convention_area.conventions', '-attendees.conventions')
 
-    @validates('attendee_id')
-    def validate_attendee_id(self, key, attendee_id):
-        if not isinstance(attendee_id, int):
-            raise ValueError("attendees id must have an integer value")
+    # @validates('attendee_id')
+    # def validate_attendee_id(self, key, attendee_id):
+    #     if not isinstance(attendee_id, int):
+    #         raise ValueError("attendees id must have an integer value")
 
-    @validates('convention_area_id')
-    def validate_convention_areas_id(self, key, convention_area_id):
-        if not isinstance(convention_area_id, int):
-            raise ValueError('convention area id must have an integer value')
+    # @validates('convention_area_id')
+    # def validate_convention_areas_id(self, key, convention_area_id):
+    #     if not isinstance(convention_area_id, int):
+    #         raise ValueError('convention area id must have an integer value')

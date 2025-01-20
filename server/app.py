@@ -2,8 +2,7 @@
 
 from flask import Flask, make_response, jsonify, request
 from flask_restful import Api, Resource
-from flask_migrate import flask_migrate
-from config import db, app
+from config import db, app, api
 from models import Convention, ConventionArea, Attendee
 import os
 
@@ -94,7 +93,7 @@ class ConventionById(Resource):
             return '', 204
         return {'error': 'Convention not found'}, 404
 
-class AttendeeByID(Resource):
+class AttendeeById(Resource):
     def get(self, id):
         attendee = db.session.get(Attendee,id)
         if attendee:
@@ -123,7 +122,7 @@ api.add_resource(ConventionAreas, '/convention_areas')
 api.add_resource(Conventions, '/conventions')
 api.add_resource(Attendees, '/attendees')
 api.add_resource(ConventionById, '/conventions/<int:id>')
-api.add_resource(AttendeesById, '/attendees/<int:id>')
+api.add_resource(AttendeeById, '/attendees/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
