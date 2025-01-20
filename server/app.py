@@ -94,6 +94,30 @@ class ConventionById(Resource):
             return '', 204
         return {'error': 'Convention not found'}, 404
 
+class AttendeeByID(Resource):
+    def get(self, id):
+        attendee = db.session.get(Attendee,id)
+        if attendee:
+            return attendee.to_dict(), 200
+        return {'error': 'Attendee not found'}, 404
+
+    def patch(self, id):
+        attendee = db.session.get(Attendee, id)
+        if attendee:
+            data = request.get_json()
+            for key, value in data.items():
+                setattr(attendee, key, value)
+            db.session.commit()
+            return make_response(attendee.to_dict(), 200)
+        return make_response({'error': 'Attendee not found'}, 404)
+
+    def delete(self, id):
+        attendee = db.session.get(Attendee, id)
+        if attendee:
+            db.session.delete(attendee)
+            db.session.commit()
+            return '', 204
+        return {'error': 'attendee not found'}, 404
 
 
 if __name__ == '__main__':
