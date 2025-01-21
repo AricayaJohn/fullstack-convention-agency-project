@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ConventionAreaCard from "./ConventionAreaCard";
 import { Link } from "react-router-dom";
 
