@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ConventionAreaForm(){
     const [locationName, setLocationName] = useState("");
@@ -18,11 +18,10 @@ function ConventionAreaForm(){
                 response.json().then(() => {
                     setLocationName("");
                     setVenue("");
-                })
+                });
             }
-        })
-    }
-}
+        });
+    };
 
 return (
     <div>
@@ -50,6 +49,7 @@ return (
         </form>
         <Link to="/"> Back to Home </Link>
     </div>
-)
+    );
+}
 
 export default ConventionAreaForm
