@@ -1,22 +1,28 @@
-import { Link, Route, Switch } from "react-router-dom";
+import {Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import HomePage from "./HomePage";
 import ConventionAreaForm from "./ConventionAreaForm";
+import ConventionsPage from "./ConventionsPage";
 
 function App() {
   return (
-    <main>
-      <h1>
-        <Link to="/">Convention Agency</Link>
-      </h1>
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="/add-convention-area">
-          <ConventionAreaForm />
-        </Route>
-      </Switch>
-    </main>
+    <Router>
+      <main>
+        <h1>
+          Convention Agency
+        </h1>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/add-convention-area">
+            <ConventionAreaForm />
+          </Route>
+          <Route path="/add-convention-area">
+            <ConventionsPage />
+          </Route>
+        </Switch>
+      </main>
+    </Router>
   );
 }
 

@@ -7,7 +7,7 @@ function ConventionAreaCard({ area }) {
             <h2>{area.location_name}</h2>
             <p>{area.venue}</p>
             <Link to={`/conventions/${area.id}`}>
-            View Conventions in ${location_name}
+                View Conventions in {area.location_name}
             </Link>
         </div>
     )

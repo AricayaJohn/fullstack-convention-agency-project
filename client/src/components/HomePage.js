@@ -14,12 +14,16 @@ function HomePage(){
     return (
         <div>
             <h1>Convention Areas</h1>
+            {conventionAreas.length > 0 ? (
+        conventionAreas.map((area) => (
+          <ConventionAreaCard key={area.id} area={area} />
+        ))
+      ) : (
+        <p>No convention areas found.</p>
+      )}
             <Link to="/add-convention-area">
             Add Convention Area
             </Link>
-            {conventionAreas.map((area) => (
-                <ConventionAreaCard key={area.id} area={area} />
-            ))}
         </div>
     );
 }
