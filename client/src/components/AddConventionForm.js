@@ -41,9 +41,14 @@ function AddConventionForm({areaId, onAddConvention}) {
             <label>
                 Days:
                 <input 
-                    
+                    type = "number"
+                    value = {days}
+                    onChange = {(e) => setDays(e.target.value)}
                 />
             </label>
+            <button type="submit"> Add Convention</button>
         </form>
-    )
+    );
 }
+
+export default AddConventionForm;
