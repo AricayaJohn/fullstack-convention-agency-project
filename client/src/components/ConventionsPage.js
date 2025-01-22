@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import ConventionCard from "./ConventionCard";
 
-function ConventionPage() {
+function ConventionsPage() {
     const [{ data: convention, error, status }, setConvention] = useState({
         data: null,
         error: null,
@@ -13,9 +13,13 @@ function ConventionPage() {
     useEffect(() => {
         fetch(`/conventions/${id}`).then((response) => {
             if(response.ok) {
+                response.json().then((data) => 
+                    setConvention({ data, error: null, status: "resolved"})
+                );
+            } else {
                 response.json().then((err) => 
-                setConvention({data: null, error: err.error, status: "rejected"})
-            );
+                    setConvention({data: null, error: err.error, status: "rejected"})
+               );
             }
         });
     }, [id]);
@@ -36,4 +40,4 @@ function ConventionPage() {
     );
 };
 
-export default ConventionPage
+export default ConventionsPage

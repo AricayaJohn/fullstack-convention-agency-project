@@ -17,7 +17,7 @@ function App() {
           <Route path="/add-convention-area">
             <ConventionAreaForm />
           </Route>
-          <Route path="/add-convention-area">
+          <Route path="/conventions/:id">
             <ConventionsPage />
           </Route>
         </Switch>
