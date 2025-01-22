@@ -3,6 +3,7 @@ import React, {useState} from "react";
 function AddConventionForm({areaId, onAddConvention}) {
     const [conventionName, setConventionName] = useState("");
     const [days, setDays] = useState("");
+    const [attendeeId, setAttendeeId] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,6 +16,7 @@ function AddConventionForm({areaId, onAddConvention}) {
                 convention_name: conventionName,
                 days: parseInt(days),
                 convention_area_id: parseInt(areaId),
+                attendee_id: parseFloat(attendeeId)
             }),
         })
         .then(response => response.json())
@@ -22,6 +24,7 @@ function AddConventionForm({areaId, onAddConvention}) {
             onAddConvention(newConvention);
             setConventionName("");
             setDays("");
+            setAttendeeId("")
         })
         .catch(error => console.error('Error:', error));
     };
