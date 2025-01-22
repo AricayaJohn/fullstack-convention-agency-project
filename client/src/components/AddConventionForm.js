@@ -26,4 +26,24 @@ function AddConventionForm({areaId, onAddConvention}) {
         })
         .catch(error => console.error('Error:', error));
     };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <h2> Add New Convention</h2>
+            <label>
+                Convention Name:
+                <input
+                    type = "text"
+                    value = {conventionName}
+                    onChange = {(e) => setConventionName(e.target.value)}
+                />
+            </label>
+            <label>
+                Days:
+                <input 
+                    
+                />
+            </label>
+        </form>
+    )
 }
