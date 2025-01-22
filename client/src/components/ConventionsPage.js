@@ -27,9 +27,8 @@ function ConventionsPage() {
             .catch((err) =>
                 setConventions({ data: null, error: err.message, status: "rejected" })
             );
-    }, [areaId]); // Re-fetch when areaId changes
+    }, [areaId]); 
     
-    // Handle different loading states
     if (status === "pending") return <h2>Loading...</h2>;
     if (status === "rejected") return <h2>Error: {error}</h2>;
 

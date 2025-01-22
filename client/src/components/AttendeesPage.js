@@ -17,7 +17,7 @@ function AttendeesPage(){
             }
         })
         .then((data) => {
-            setAttendees(data);
+            setAttendees([data]);
             setStatus("resolved")
         })
         .catch((err) => {
