@@ -9,8 +9,7 @@ function ConventionsPage() {
         status: "pending",
     });
     
-    // Get the convention_area_id from the URL params
-    const { areaId } = useParams(); // useParams will grab the areaId from the URL
+    const { areaId } = useParams(); 
     
     useEffect(() => {
         fetch(`/conventions?convention_area_id=${areaId}`)
