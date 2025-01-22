@@ -15,7 +15,7 @@ def index():
 class ConventionAreas(Resource):
     def get(self):
         areas = ConventionArea.query.all()
-        return [area.to_dct(only=('id', 'location_name', 'venue')) for area in areas]
+        return [area.to_dict(only=('id', 'location_name', 'venue')) for area in areas]
 
     def post(self):
         data = request.get_json()
@@ -32,8 +32,12 @@ class ConventionAreas(Resource):
 
 class Conventions(Resource):
     def get(self):
-        conventions = Convention.query.all()
-        return [convention.to_dict(only=('id, convention_name', 'days', 'convention_area_id', 'attendee_id')) for convention in conventions]
+        convention_area_id = request.args.get('convention_area_id', type=int)
+        if convention_area_id:
+            conventions = Convention.query.filter_by(convention_area_id=convention_area_id).all()  # Fixed typo here
+        else:
+            conventions = Convention.query.all()
+        return [convention.to_dict(only=('id', 'convention_name', 'days', 'convention_area_id', 'attendee_id')) for convention in conventions]
 
     def post(self):
         data = request.get_json()
@@ -52,8 +56,20 @@ class Conventions(Resource):
 
 class Attendees(Resource):
     def get(self):
-        attendees = Attendee.query.all()
-        return [attendee.to_dict(only=('id', 'name', 'profession')) for attendee in attendees ]
+        convention_id = request.args.get('convention_id', type=int)
+        if convention_id:
+            convention = Convention.query.get(convention_id)
+            if convention:
+                if convention.attendee_id:
+                    attendee = Attendee.query.get(convention.attendee_id)
+                    return attendee.to_dict(only=('id', 'name', 'profession'))
+                else:
+                    return {'error': 'No attendees in Convention not found'}, 404
+            else:
+                return {'error': 'convention not found'}, 404
+        else:
+            attendees = Attendee.query.all()
+            return [attendee.to_dict(only=('id', 'name', 'profession')) for attendee in attendees]
 
     def post(self):
         data = request.get_json()

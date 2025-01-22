@@ -22,6 +22,8 @@ class Attendee(db.Model, SerializerMixin):
     name = db.Column(db.String, nullable=False)
     profession = db.Column(db.String, nullable=False)
 
+    coventions = db.relationship('Convention', backref='attendees')
+
     serialize_rules = ('-conventions.attendees',)
 
     @validates('name')
