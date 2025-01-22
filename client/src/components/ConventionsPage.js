@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ConventionCard from "./ConventionCard";
+import AddConventionForm from "./AddConventionForm";
 
 function ConventionsPage() {
     const [{ data: conventions, error, status }, setConventions] = useState({
@@ -28,6 +29,13 @@ function ConventionsPage() {
                 setConventions({ data: null, error: err.message, status: "rejected" })
             );
     }, [areaId]); 
+
+    const handleAddConvention = (newConvention) => {
+        setConventions((prevState) => ({
+            ...prevState,
+            data: [...prevState.data, newConvention]
+        }))
+    }
     
     if (status === "pending") return <h2>Loading...</h2>;
     if (status === "rejected") return <h2>Error: {error}</h2>;
@@ -42,6 +50,7 @@ function ConventionsPage() {
             ) : (
                 <p>No conventions found for this area.</p>
             )}
+            <AddConventionForm areaId={areaId} onAddConvention={handleAddConvention} />
             <Link to="/">Back to Home</Link>
         </div>
     );

@@ -15,7 +15,6 @@ function AddConventionForm({areaId, onAddConvention}) {
                 convention_name: conventionName,
                 days: parseInt(days),
                 convention_area_id: parseInt(areaId),
-                attendee_id: parseInt(attendeeId)
             }),
         })
         .then(response => response.json())
@@ -38,6 +37,7 @@ function AddConventionForm({areaId, onAddConvention}) {
                     onChange = {(e) => setConventionName(e.target.value)}
                 />
             </label>
+            <br />
             <label>
                 Days:
                 <input 
@@ -46,6 +46,7 @@ function AddConventionForm({areaId, onAddConvention}) {
                     onChange = {(e) => setDays(e.target.value)}
                 />
             </label>
+            <br/>
             <button type="submit"> Add Convention</button>
         </form>
     );
