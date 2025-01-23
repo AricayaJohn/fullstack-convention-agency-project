@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 function ConventionCard({ convention, onDelete }){
     const handleDelete = () => {
-        fetch(`/conventions/$convention.id`, {
+        fetch(`/conventions/${convention.id}`, {
             method: 'DELETE',
         })
         .then(response => {

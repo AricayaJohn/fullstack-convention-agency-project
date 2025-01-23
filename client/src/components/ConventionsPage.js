@@ -36,6 +36,12 @@ function ConventionsPage() {
             data: [...prevState.data, newConvention]
         }))
     }
+    const handleDeleteConvention = (id) => {
+        setConventions((prevState) => ({
+            ...prevState,
+            data: prevState.data.filter(convention => convention.id !== id)
+        }));
+    };
     
     if (status === "pending") return <h2>Loading...</h2>;
     if (status === "rejected") return <h2>Error: {error}</h2>;
@@ -45,7 +51,11 @@ function ConventionsPage() {
             <h1>Conventions in Area {areaId}</h1>
             {conventions && conventions.length > 0 ? (
                 conventions.map((convention) => (
-                    <ConventionCard key={convention.id} convention={convention} />
+                    <ConventionCard 
+                        key={convention.id} 
+                        convention={convention}
+                        onDelete={handleDeleteConvention}
+                    />
                 ))
             ) : (
                 <p>No conventions found for this area.</p>
