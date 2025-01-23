@@ -31,6 +31,20 @@ function AttendeesPage(){
         setAttendees((prevState) => [...prevState, newAttendee]);
     };
 
+    const handleDeleteAttendee = (id) => {
+        fetch(`/attendees/${id}`, {
+            method: 'DELETE',
+        })
+        .then((response) => {
+            if (response.ok) {
+                setAttendees((prevState) => prevState.filter(attendee => attendee.id !== id));
+            } else {
+                throw new Error ("Failede to delete attendee");
+            }
+        })
+        .catch((error) => console.error('Error', error));
+    }
+
     if (status === "pending") return <h2>Loading</h2>
     if (status === "rejected") return <h2>Error: {error}</h2>
 
@@ -43,6 +57,7 @@ function AttendeesPage(){
                         <li key={attendee.id}>
                             <h3>{attendee.name}</h3>
                             <p>Profession: {attendee.profession}</p>
+                            <button onClick={() => handleDeleteAttendee(attendee.id)}>Delete Attendee</button>
                         </li>
                     ))}
                 </ul>
