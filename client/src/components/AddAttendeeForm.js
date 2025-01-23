@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function AddAttendeeFrom({conventionId, onAddAttendee}) {
+function AddAttendeeForm({conventionId, onAddAttendee}) {
     const [name, setName] = useState("");
     const [profession, setProfession] = useState("");
 
@@ -50,4 +50,4 @@ function AddAttendeeFrom({conventionId, onAddAttendee}) {
     );
 }
 
-export default AddAttendeeFrom;
+export default AddAttendeeForm;

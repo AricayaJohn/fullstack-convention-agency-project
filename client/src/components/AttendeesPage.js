@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
+import AddAttendeeForm from "./AddAttendeeForm";
 
 function AttendeesPage(){
     const {conventionId} = useParams();
@@ -26,6 +27,10 @@ function AttendeesPage(){
         });
     }, [conventionId])
 
+    const handleAddAttendee = (newAttendee) => {
+        setAttendees((prevState) => [...prevState, newAttendee]);
+    };
+
     if (status === "pending") return <h2>Loading</h2>
     if (status === "rejected") return <h2>Error: {error}</h2>
 
@@ -44,6 +49,7 @@ function AttendeesPage(){
             ) :(
                 <p> No attendees found for this convention.</p>
             )}
+            <AddAttendeeForm conventionId={conventionId} onAddAttendee={handleAddAttendee} />
             <Link to={`/conventions/${conventionId}`}>Back to Convention Page</Link>
         </div>
     );
